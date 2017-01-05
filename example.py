@@ -16,3 +16,4 @@ if __name__ == "__main__":
                                 xlabel="epochs") 
     pp.plot(y_list, x_list)
     pp.show()
+    pp.save("example")
