@@ -1,4 +1,4 @@
-import pretty_plot
+from prettyplots import PrettyPlot
 import numpy as np
 
 if __name__ == "__main__":
@@ -11,9 +11,8 @@ if __name__ == "__main__":
     x_list = [epochs, epochs, epochs]
     y_list = [y1, y2, y3]
     
-    pp = pretty_plot.PrettyPlot(title="Demo", 
-                                ylabel="function value", 
-                                xlabel="epochs") 
+    pp = PrettyPlot(title="Demo", ylabel="function value", 
+                    xlabel="epochs") 
     pp.plot(y_list, x_list)
     pp.show()
     pp.save("example")
