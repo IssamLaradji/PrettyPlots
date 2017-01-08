@@ -1,9 +1,0 @@
-setup.py
-pretty_plots.egg-info/PKG-INFO
-pretty_plots.egg-info/SOURCES.txt
-pretty_plots.egg-info/dependency_links.txt
-pretty_plots.egg-info/not-zip-safe
-pretty_plots.egg-info/top_level.txt
-prettyplots/__init__.py
-prettyplots/plot_utils.py
-prettyplots/pretty_plot.py
