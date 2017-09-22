@@ -40,7 +40,6 @@ class PrettyPlot:
         self.ax = ax
         self.lim_set = False
         self.ylim = None
-        print "TEST"
 
     def show(self):
         plt.show()
