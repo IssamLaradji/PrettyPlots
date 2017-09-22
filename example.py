@@ -8,11 +8,15 @@ if __name__ == "__main__":
 
     epochs = np.arange(1000)
 
+    labels = ["exp1", "exp2", "exp3"]
     x_list = [epochs, epochs, epochs]
     y_list = [y1, y2, y3]
     
-    pp = PrettyPlot(title="Demo", ylabel="function value", 
+    pp = PrettyPlot(title="Demo", 
+                    ylabel="function value", 
                     xlabel="epochs") 
-    pp.plot(y_list, x_list)
+    import pdb; pdb.set_trace()  # breakpoint d3260be3 //
+    
+    pp.plot(y_list, x_list, labels=labels)
     pp.show()
     pp.save("example")

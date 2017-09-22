@@ -6,9 +6,11 @@ import plot_utils as pu
 matplotlib.style.use('bmh')
 
 markers = [("-", "o"), ("-", "p"), ("-", "D"), ("-", "^"), ("-", "s"),
-               ("-", "8"), ("-", "o")]
+               ("-", "8"), ("-", "o"), ("-", "o"), ("-", "o"), ("-", "o"), 
+               ("-", "o"), ("-", "o")]
 colors = ['#741111', "#000000", '#3a49ba','#7634c9', 
-          "#4C9950", "#CC29A3", '#ba3a3a', "#0f7265"]
+          "#4C9950", "#CC29A3", '#ba3a3a', "#0f7265",
+          "#7A7841", "#00C5CD"]
 
 bright_colors = ["#00C5CD"]
 
@@ -21,9 +23,9 @@ def setup_fig(title=None, ylabel=None, xlabel=None):
         #ax.set_title(title, fontsize=14)
         fig.suptitle(title, fontsize=14)
     if ylabel is not None:
-        ax.set_ylabel(ylabel, fontsize=12)
+        ax.set_ylabel(ylabel, fontsize=16)
     if xlabel is not None:
-        ax.set_xlabel(xlabel, fontsize=12)
+        ax.set_xlabel(xlabel, fontsize=16)
 
     #fig.patch.set_facecolor('white')
 
@@ -31,22 +33,24 @@ def setup_fig(title=None, ylabel=None, xlabel=None):
     return fig, ax
 
 class PrettyPlot:
-    def __init__(self, title=None, ylabel=None, xlabel=None):
+    def __init__(self, title=None, ylabel=None, xlabel=None, fontsize=14):
         fig, ax = setup_fig(title, ylabel, xlabel)
-
+        self.fontsize = fontsize
         self.fig = fig 
         self.ax = ax
         self.lim_set = False
+        self.ylim = None
 
     def show(self):
         plt.show()
 
-    def save(self, path):
+    def save(self, path, iformat="png"):
         pu.create_dirs(path)
-        self.fig.savefig(path + ".png")
-        print "Figure saved in %s" % (path)
+        fname = path + ".%s" % iformat
+        self.fig.savefig(fname, bbox_inches='tight')
+        print "Figure saved in %s" % (fname)
 
-    def plot_DataFrame(self, results):
+    def plot_DataFrame(self, results):        
         n_points, n_labels = results.shape
         
         x_vals = np.arange(n_points)
@@ -63,14 +67,25 @@ class PrettyPlot:
 
     def set_lim(self, ylim, xlim):
         self.lim_set = True
+        self.ylim = ylim
+
         self.ax.set_ylim(ylim) 
         self.ax.set_xlim(xlim)   
-              
+    
+    def set_tickSize(self, labelsize=8):
+        [tick.label.set_fontsize(labelsize) for tick in self.ax.yaxis.get_major_ticks()]
+        [tick.label.set_fontsize(labelsize) for tick in self.ax.xaxis.get_major_ticks()]
+
+    def set_title(self, title):
+        self.fig.suptitle(title, fontsize=14)
+
     def plot(self, y_list, x_list, labels=None):
         fig = self.fig
         ax = self.ax 
-
-        label_positions, label_indices = pu.get_labelPositions(y_list, x_list)
+        
+        label_positions, label_indices = pu.get_labelPositions(y_list, 
+                                                               x_list,
+                                                               self.ylim)
 
         ls_markers = markers
         n_labels = len(y_list)
@@ -86,7 +101,7 @@ class PrettyPlot:
 
             ax.set_ylim([y_min, y_max]) 
             ax.set_xlim([x_min, x_max]) 
-
+        
         for i in range(n_labels):
             color = colors[i]
             ls, marker = ls_markers[i]
@@ -106,7 +121,7 @@ class PrettyPlot:
 
             markerFreq = n_points / (int(np.log(n_points)) + 1)
             line, = ax.plot(x_vals, y_vals, markevery=markerFreq, 
-                    markersize=8, color=color, lw=lw, alpha=0.9,
+                    markersize=12, color=color, lw=lw, alpha=0.9,
                     label=label, ls=ls, marker=marker)
 
             x_point, y_point = label_positions[i]
@@ -116,7 +131,7 @@ class PrettyPlot:
                     rotation=angle,
                     color=color, 
                     bbox=pu.box_color(color, ls, marker), 
-                    fontsize=14)
+                    fontsize=self.fontsize)
 
         return fig, ax
 
