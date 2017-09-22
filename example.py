@@ -15,7 +15,6 @@ if __name__ == "__main__":
     pp = PrettyPlot(title="Demo", 
                     ylabel="function value", 
                     xlabel="epochs") 
-    import pdb; pdb.set_trace()  # breakpoint d3260be3 //
     
     pp.plot(y_list, x_list, labels=labels)
     pp.show()
