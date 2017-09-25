@@ -116,8 +116,14 @@ def get_labelPositions(y_list, x_list, ylim=None):
             xy_points[:, 0] = x_list[i]
             xy_points[:, 1] = y_list[i]
    
+        xy_normed = xy_points - np.array([x_min, y_min])
+        xy_normed /= np.array([x_max - x_min, y_max - y_min])
+
+        ref_normed = ref_points[:n_border + i] - np.array([x_min, y_min])
+        ref_normed /= np.array([x_max - x_min, y_max - y_min])
         # GET REF POINTS
-        dist = pairwise_distances(xy_points, ref_points[:n_border + i])
+        dist = pairwise_distances(xy_normed, ref_normed,
+         metric="l1")
 
         # GET MINIMUM DISTANCES
         min_dist = dist.min(axis=1)
