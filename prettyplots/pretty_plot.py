@@ -1,7 +1,7 @@
 import pylab as plt
 import matplotlib
 import numpy as np
-import plot_utils as pu
+from prettyplots import plot_utils as pu
 
 matplotlib.style.use('bmh')
 
