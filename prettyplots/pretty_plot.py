@@ -29,7 +29,7 @@ def setup_fig(title=None, ylabel=None, xlabel=None):
 
     #fig.patch.set_facecolor('white')
 
-    ax.set_axis_bgcolor('white')
+    ax.set_facecolor('white')
     return fig, ax
 
 class PrettyPlot:
