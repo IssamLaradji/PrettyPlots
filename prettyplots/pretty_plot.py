@@ -48,7 +48,7 @@ class PrettyPlot:
         pu.create_dirs(path)
         fname = path + ".%s" % iformat
         self.fig.savefig(fname, bbox_inches='tight')
-        print "Figure saved in %s" % (fname)
+        print("Figure saved in %s" % (fname))
 
     def plot_DataFrame(self, results):        
         n_points, n_labels = results.shape
