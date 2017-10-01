@@ -1,5 +1,9 @@
 This contains code for plotting nice-looking figures for experiments and papers.
 
+You can install this library by executing the following command in Terminal:
+
+`pip install --upgrade git+https://github.com/IssamLaradji/PrettyPlots.git`
+
 Run `example.py` to generate a pretty plot like the one below:
 
 ```python
