@@ -83,6 +83,22 @@ class PrettyPlot:
         fig = self.fig
         ax = self.ax 
         
+        tmp = []
+        for yl in y_list:
+          if isinstance(yl, list):
+            tmp += [np.array(yl)]
+          else:
+            tmp += [yl]
+        y_list = tmp    
+        
+        tmp = []
+        for xl in x_list:
+          if isinstance(xl, list):
+            tmp += [np.array(xl)]
+          else:
+            tmp += [xl]
+        x_list = tmp  
+        
         label_positions, label_indices = pu.get_labelPositions(y_list, 
                                                                x_list,
                                                                self.ylim)
